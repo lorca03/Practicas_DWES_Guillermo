@@ -13,7 +13,6 @@
         $sum=$operador1+$operador2;
         $res=$operador1-$operador2;
         echo "La suma de $operador1 y $operador2 es $sum<br/>La resta de $operador1 y $operador2 es $res<br/>";
-        
         echo "hola mundo";
     ?>    
 </body>
