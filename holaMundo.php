@@ -10,8 +10,8 @@
     <?php
         $operador1=3;
         $operador2=8;
-        $suma= $operador1+$operador2;
-        echo "La suma es $suma";
+        echo "La suma de $operador1 y $operador2 es "+($operador1+$operador2);
+        
         echo "hola mundo";
     ?>    
 </body>
