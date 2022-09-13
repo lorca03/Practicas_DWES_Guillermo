@@ -8,6 +8,9 @@
 </head>
 <body>
     <?php
+        $operador1=3;
+        $operador2=8;
+        echo "La suma es "+($operador1+ $operador2 )+"\nLa resta es "+($operador1- $operador2 )+"\nLa multiplicacion es "+($operador1* $operador2 );
         echo "hola mundo";
     ?>    
 </body>
