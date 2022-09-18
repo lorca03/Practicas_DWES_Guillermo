@@ -5,9 +5,9 @@
         $exponente=2;
     }
     $cont=1;
-    $resultado=0; 
-    while ($cont<=$exponente){
-        $resultado=$resultado+($base*$base);
+    $resultado=$base; 
+    while ($cont<$exponente){
+        $resultado=$resultado*$base;
         $cont++;
     }
     echo $resultado;
