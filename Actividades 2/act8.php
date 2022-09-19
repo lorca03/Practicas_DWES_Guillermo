@@ -1,7 +1,8 @@
 <?php
-    //$edad=$_POST["Nacimiento"];
+    $nac=$_POST["Nacimiento"];
+    $nac=strtotime($nac);
     $hoy= date("U");
-    echo $hoy;
-    /*for ($i=0; $i < sizeof($hoy); $i++) { 
-       echo $hoy[$i];
-    }*/
+    $edad=$hoy-$nac-1970;
+    $edad= gmdate("Y",$edad);
+    echo $edad-1970;
+    
