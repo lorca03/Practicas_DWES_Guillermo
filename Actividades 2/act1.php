@@ -1,4 +1,4 @@
 <?php
-    for ($i=10; $i=0; $i--) { 
-        echo $i;
-    }
+for ($i=10; $i > 0; $i--) { 
+    echo $i;
+}
