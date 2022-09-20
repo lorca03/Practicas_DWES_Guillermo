@@ -1,5 +1,8 @@
 <?php
  $horas=$_POST["Horas"];
- $horasEX=$_POST["HorasEX"];
- $sueldo=(11*$horas)+(15*$horasEX);
+ $horasex=0;
+ if ($horas>40) {
+    $horasex=$horas-40;
+ }
+ $sueldo=(($horas-$horasex)*11)+($horasex*15);
  echo "Sueldo: ".$sueldo."€";
