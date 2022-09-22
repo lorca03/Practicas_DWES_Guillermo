@@ -14,41 +14,52 @@
 </head>
 
 <body>
-    <?php
-    $ingles=["Ball","Good","Car","House","Bike"];
-    $español=["Pelota","Bien","Coche","Casa","Bici"];
-
-    if (isset($_POST["enviar"])) {
+    <?php 
+    $ingles=["ball","good","car","house","bike"];
+    $español=["pelota","bien","coche","casa","bici"];
+    $traduccion="";
+    $palabra="";
+    if (isset($_POST["enviar"])&& isset($_POST["palabra"])) {
+       $palabra="pelota"/*$_POST["palabra"]*/;
+       if (in_array(strtolower($palabra),$ingles) ) {
+        
+       }else {
+        if (in_array(strtolower($palabra),$español) ) {
+            
+        }else {
+            echo "No tenemos esa palabra en el diccionario";
+        }
+       }
        
 
-
+    }else{
+        echo "<script>alert('Tienes que escribir una palabra');</script>";
     }
+    
     ?>
 
 
     <div class="container">
         <div class="abs-center">
             <form method="post" class="border p-3 form">
-
+                <legend>Diccionario</legend>
                 <div class="container">
                     <div class="form-group row">
-                        <label for="Ecuacion">Diccionario</label>
-                        <input type="text" disabled name="pregunta" class="form-control" value="<?php if (isset($pregunta1)) {
-                                                                                                    echo $pregunta1;
-                                                                                                } ?>" />
+                        <label for="Ecuacion">Buscador</label>
+                        <input type="text" name="palabra" class="form-control"/>
+                                                                                                
                     </div>
                     <br>
-                </div>
-                 <br>    
-                <div class="form-group row ">
-                    <button type="submit" name="enviar" class="btn btn-primary col">Tirar</button>
-                    <div class="col">
-                        <label for="">Aciertos</label>
-                        <input type="text" disabled name="aciertos" class="form-control" value="<?php if (isset($aciertos)) {
-                                                                                                    echo $aciertos;
+                    <div class="form-group row">
+                        <label for="Ecuacion">Traduccion</label>
+                        <input type="text" name="pregunta" class="form-control" value="<?php if (isset($traduccion)) {
+                                                                                                    echo $traduccion;
                                                                                                 } ?>" />
+                                                                                                
                     </div>
                 </div>
+                 <br>    
+                    <button type="submit" name="enviar" class="btn btn-primary col">Traducir</button>
 
             </form>
         </div>

@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="estilo.css">
 </head>
-
+ 
 <body>
     <?php
     $aciertos = 0;
@@ -21,28 +21,40 @@
     $pregunta2 = "Quien es el presidente de E.E.U.U.?";
     $pregunta3 = "Cunatos paises hay en la UNion Europea?";
     $opcion1 ="";
-    if (isset($_POST["enviar"])) {
+    $opcion2 ="";
+    $opcion3 ="";
+    $norespondidas=0;
+    if (isset($_POST["enviar"]) ) {
         $opcion1 = $_POST["opcion1"];
-        echo $opcion1;
         $opcion2 = $_POST["opcion2"];
         $opcion3 = $_POST["opcion3"];
         if ($opcion1=="2") {
             $aciertos++;
         }else {
-            $fallos++;
+            if ($opcion1==0) {
+                $norespondidas++;
+            }else {
+                $fallos++;
+            }
         }
         if ($opcion2=="Joe Biden") {
             $aciertos++;
         }else {
-            $fallos++;
+            if ($opcion2==0) {
+                $norespondidas++;
+            }else {
+                $fallos++;
+            }
         }
         if ($opcion3=="27") {
             $aciertos++;
         }else {
-            $fallos++;
+            if ($opcion3==0) {
+                $norespondidas++;
+            }else {
+                $fallos++;
+            }
         }
-
-
     }
     ?>
 
@@ -59,6 +71,7 @@
                                                                                                 } ?>" />
                     </div>
                     <br>
+                    <input type="hidden" name="opcion1" value="0" checked>
                     <input type="radio" name="opcion1" value="1">
                     <label for="html">1</label><br>
                     <input type="radio" name="opcion1" value="2">
@@ -75,6 +88,7 @@
                                                                                                 } ?>" />
                     </div>
                     <br>
+                    <input type="hidden" name="opcion2" value="0" checked>
                     <input type="radio" name="opcion2" value="Joe Biden">
                     <label for="html">Joe Biden</label><br>
                     <input type="radio" name="opcion2" value="Donald Trump">
@@ -91,6 +105,7 @@
                                                                                                 } ?>" />
                     </div>
                     <br>
+                    <input type="hidden" name="opcion3" value="0" checked>
                     <input type="radio" name="opcion3" value="29">
                     <label for="html">29</label><br>
                     <input type="radio" name="opcion3" value="26">
@@ -117,6 +132,12 @@
                         <label for="">Fallos</label>
                         <input type="text" disabled name="fallos" class="form-control" value="<?php if (isset($fallos)) {
                                                                                                     echo $fallos;
+                                                                                                } ?>" />
+                    </div>
+                    <div class="col">
+                        <label for="">No enviada</label>
+                        <input type="text" disabled name="fallos" class="form-control" value="<?php if (isset($norespondidas)) {
+                                                                                                    echo $norespondidas;
                                                                                                 } ?>" />
                     </div>
                 </div>
