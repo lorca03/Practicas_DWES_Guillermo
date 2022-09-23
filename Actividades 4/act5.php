@@ -15,10 +15,12 @@
 
 <body>
     <?php 
-    $ingles=["ball","good","car","house","bike"];
-    $español=["pelota","bien","coche","casa","bici"];
-    $traduccion="";
-    $palabra="";
+    $copas=[1,2,3,4,5,6,7,8,9,10,11,12];
+    $bastos=[1,2,3,4,5,6,7,8,9,10,11,12];
+    $oros=[1,2,3,4,5,6,7,8,9,10,11,12];
+    $espadas=[1,2,3,4,5,6,7,8,9,10,11,12];
+    $cartas=[$copas,$oros,$bastos,$espadas];
+    
     
     if (isset($_POST["enviar"])&& isset($_POST["palabra"])) {
         $palabra=$_POST["palabra"];
@@ -35,8 +37,6 @@
         }
        
 
-    }else{
-        echo "<script>alert('Tienes que escribir una palabra');</script>";
     }
     
     ?>
@@ -45,24 +45,37 @@
     <div class="container">
         <div class="abs-center">
             <form method="post" class="border p-3 form">
-                <legend>Diccionario</legend>
+                <legend>Cartas</legend>
                 <div class="container">
                     <div class="form-group row">
-                        <label for="Ecuacion">Buscador</label>
-                        <input type="text" name="palabra" class="form-control"/>
-                                                                                                
+                        <div class="col-4">
+                        <input type="text" disabled name="palabra" class="form-control"/> 
+                        </div>
+                        <div class="col-4">
+                        <input type="text" disabled name="palabra" class="form-control"/> 
+                        </div>
+                        <div class="col-4">
+                        <input type="text" disabled name="palabra" class="form-control"/> 
+                        </div>
+                        <div class="col">
+                        <input type="text" disabled name="palabra" class="form-control"/> 
+                        </div>
+                        <div class="col">
+                        <input type="text" disabled name="palabra" class="form-control"/> 
+                        </div>              
                     </div>
                     <br>
                     <div class="form-group row">
-                        <label for="Ecuacion">Traduccion</label>
+                        <label for="Ecuacion">Puntos</label>
                         <input type="text" name="pregunta" class="form-control" value="<?php if (isset($traduccion)) {
                                                                                                     echo $traduccion;
                                                                                                 } ?>" />
-                                                                                                
+                                            
+                                            <button type="submit" name="enviar" class="btn btn-primary col">Traducir</button>
                     </div>
                 </div>
                  <br>    
-                    <button type="submit" name="enviar" class="btn btn-primary col">Traducir</button>
+                    
 
             </form>
         </div>
