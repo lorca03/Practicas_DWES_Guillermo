@@ -14,31 +14,44 @@
 </head>
 
 <body>
-    <?php 
-    $copas=[1,2,3,4,5,6,7,8,9,10,11,12];
-    $bastos=[1,2,3,4,5,6,7,8,9,10,11,12];
-    $oros=[1,2,3,4,5,6,7,8,9,10,11,12];
-    $espadas=[1,2,3,4,5,6,7,8,9,10,11,12];
-    $cartas=[$copas,$oros,$bastos,$espadas];
-    
-    
-    if (isset($_POST["enviar"])&& isset($_POST["palabra"])) {
-        $palabra=$_POST["palabra"];
-        if (in_array(strtolower($palabra),$ingles) ) {
-         $index= array_search($palabra,$ingles);
-         $traduccion=$español[$index];
-        }else {
-         if (in_array(strtolower($palabra),$español) ) {
-             $index= array_search($palabra,$español);
-             $traduccion=$ingles[$index];
-         }else {
-             $traduccion= "No tenemos esa palabra en el diccionario";
-         }
-        }
-       
+    <?php
+    $numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    $palos = ["copas", "bastos", "espadas", "oros"];
+    $puntos = 0;
+    $cartas = "";
+    $cartasarray = ["", "", "", "", ""];
 
+    if (isset($_POST["tirar"])) {
+        // $puntos = $_POST["puntos"];
+        for ($i = 0; $i < 5;) {
+            $palo = $palos[array_rand($palos)];
+            $numero = $numeros[array_rand($numeros)];
+            $carta = $numero . " de " . $palo;
+            if (!in_array($carta, $cartasarray)) {
+                switch ($numero) {
+                    case 1:
+                        $puntos += 11;
+                        break;
+                    case 10:
+                        $puntos += 3;
+                        break;
+                    case 11:
+                        $puntos += 2;
+                        break;
+                    case 12:
+                        $puntos += 4;
+                        break;
+                    case 3:
+                        $puntos += 10;
+                        break;
+                }
+                $cartas = $cartas . $carta . "\n";
+                $cartasarray[$i] = $carta;
+                $i++;
+            }
+        }
     }
-    
+
     ?>
 
 
@@ -48,35 +61,28 @@
                 <legend>Cartas</legend>
                 <div class="container">
                     <div class="form-group row">
-                        <div class="col-4">
-                        <input type="text" disabled name="palabra" class="form-control"/> 
-                        </div>
-                        <div class="col-4">
-                        <input type="text" disabled name="palabra" class="form-control"/> 
-                        </div>
-                        <div class="col-4">
-                        <input type="text" disabled name="palabra" class="form-control"/> 
-                        </div>
                         <div class="col">
-                        <input type="text" disabled name="palabra" class="form-control"/> 
+                            <textarea id="w3review" disabled name="w3review" rows="5" cols="40"><?php if (isset($cartas)) {
+                                        echo $cartas;
+                                    } ?>                                                                      
+                            </textarea>
                         </div>
-                        <div class="col">
-                        <input type="text" disabled name="palabra" class="form-control"/> 
-                        </div>              
                     </div>
                     <br>
                     <div class="form-group row">
-                        <label for="Ecuacion">Puntos</label>
-                        <input type="text" name="pregunta" class="form-control" value="<?php if (isset($traduccion)) {
-                                                                                                    echo $traduccion;
-                                                                                                } ?>" />
-                                            
-                                            <button type="submit" name="enviar" class="btn btn-primary col">Traducir</button>
+                        <div class="col">
+                            <label for="">Puntos</label>
+                            <input type="number" disabled name="puntos" class="form-control" value="<?php if (isset($puntos)) {
+                                                                                                        echo $puntos;
+                                                                                                    } ?>" />
+                        </div>
+                        <div class="col">
+                            <br>
+                            <button type="submit" name="tirar" class="btn btn-primary col">Tirar</button>
+                        </div>
                     </div>
                 </div>
-                 <br>    
-                    
-
+                <br>
             </form>
         </div>
     </div>

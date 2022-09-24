@@ -55,7 +55,7 @@
                     <br>
                     <div class="form-group row">
                         <label for="Ecuacion">Traduccion</label>
-                        <input type="text" name="pregunta" class="form-control" value="<?php if (isset($traduccion)) {
+                        <input type="text" disabled name="pregunta" class="form-control" value="<?php if (isset($traduccion)) {
                                                                                                     echo $traduccion;
                                                                                                 } ?>" />
                                                                                                 
