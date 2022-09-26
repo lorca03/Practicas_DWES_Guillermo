@@ -15,23 +15,32 @@
 
 <body>
     <?php
-    $numerosOrdenados="";
+    $numerosOrdenados = "";
     $cont = 0;
     $numero = 0;
-    $numeros = [];
+    $numeros = [2,4,3];
+    function cincuenta($array){
+        $arraydividido=[];
+        foreach ($array as $key => $num) {
+            array_push($arraydividido, $num/2);
+        }
+        return $arraydividido;
+    }
+    if (isset($_POST["reset"])) {
+        $numerosOrdenados = "";
+        $cont = 0;
+        $numero = 0;
+        $numeros = [];
+    }
     if (isset($_GET["enviar"])) {
         $numero = $_GET["numero"];
-        $numeros = $_GET["numeros"];
         $cont = $_GET["cont"];
         if ($cont == 4) {
             array_push($numeros, $numero);
             asort($numeros);
-            
-            for ($i=0; $i < 5; $i++) { 
-                $numerosOrdenados = $numerosOrdenados . $numeros[$i] . "/";
-            }
-            foreach ($numeros as &$num) {
-                
+
+            foreach ($numeros as $num) {
+                $numerosOrdenados = $numerosOrdenados . $num . "/";
             }
             echo $numerosOrdenados;
             $cont = 0;
@@ -40,12 +49,7 @@
             $cont++;
         }
     }
-    if (isset($_POST["reset"])) {
-        $numerosOrdenados = "";
-        $cont = 0;
-        $numero = 0;
-        $numeros = [];
-    }
+
     ?>
 
 
@@ -57,12 +61,11 @@
                     <div class="form-group row">
                         <label for="Ecuacion">Numero</label>
                         <input type="hidden" name="cont" value="<?php echo $cont; ?>" />
-                        <input type="hidden" name="numeros" value="<?php echo $numeros; ?>" />
                         <input type="number" name="numero" class="form-control" />
                         <label for="Ecuacion">Numeros Ordenados</label>
-                        <input type="text" disabled name="numerosOrdenados" class="form-control" value="<?php if ($numerosOrdenados!="") {
-                                                                                                    echo $numerosOrdenados;
-                                                                                                } ?>" />
+                        <input type="text" disabled name="numerosOrdenados" class="form-control" value="<?php if ($numerosOrdenados != "") {
+                                                                                                            echo $numerosOrdenados;
+                                                                                                        } ?>" />
                     </div>
                 </div>
                 <br>
