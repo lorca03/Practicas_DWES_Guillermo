@@ -18,7 +18,13 @@
     $numerosOrdenados = "";
     $cont = 0;
     $numero = 0;
-    $numeros = [2,4,3];
+     $numeros = "";
+    if (isset($_POST["reset"])) {
+        $numerosOrdenados = "";
+        $cont = 0;
+        $numero = 0;
+        $numeros = "";
+    }
     function cincuenta($array){
         $arraydividido=[];
         foreach ($array as $key => $num) {
@@ -26,44 +32,41 @@
         }
         return $arraydividido;
     }
-    if (isset($_POST["reset"])) {
-        $numerosOrdenados = "";
-        $cont = 0;
-        $numero = 0;
-        $numeros = [];
-    }
-    if (isset($_GET["enviar"])) {
-        $numero = $_GET["numero"];
-        $cont = $_GET["cont"];
+    if (isset($_POST["enviar"])) {
+        $numero = $_POST["numero"];
+        $numeros = $_POST["numeros"];
+        $cont = $_POST["cont"];
         if ($cont == 4) {
-            array_push($numeros, $numero);
-            asort($numeros);
-
-            foreach ($numeros as $num) {
+            $numeros .= $numero;
+            $array = explode(" ", $numeros);
+            asort($array);
+            $array=cincuenta($array);
+            foreach ($array as $key => $num) {
                 $numerosOrdenados = $numerosOrdenados . $num . "/";
             }
-            echo $numerosOrdenados;
+            $numeros = "";
             $cont = 0;
         } else {
-            array_push($numeros, $numero);
+            $numeros .= $numero . " ";
             $cont++;
         }
-    }
+   }
 
     ?>
 
 
     <div class="container">
         <div class="abs-center">
-            <form method="get" class="border p-3 form">
+            <form method="post" class="border p-3 form">
 
                 <div class="container">
                     <div class="form-group row">
                         <label for="Ecuacion">Numero</label>
                         <input type="hidden" name="cont" value="<?php echo $cont; ?>" />
+                        <input type="hidden" name="numeros" value="<?php echo $numeros; ?>" />
                         <input type="number" name="numero" class="form-control" />
-                        <label for="Ecuacion">Numeros Ordenados</label>
-                        <input type="text" disabled name="numerosOrdenados" class="form-control" value="<?php if ($numerosOrdenados != "") {
+                        <label for="Ecuacion">Numeros Ordenados y Divididos</label>
+                        <input type="text" disabled name="numerosOrdenados" class="form-control" value="<?php if (isset($numerosOrdenados)) {
                                                                                                             echo $numerosOrdenados;
                                                                                                         } ?>" />
                     </div>
@@ -71,7 +74,7 @@
                 <br>
                 <div class=" row ">
                     <button type="submit" name="enviar" class="btn btn-primary col">Enviar</button>
-                    <button type="reset" name="reset" class="btn btn-primary col">Reset</button>
+                    <button type="submit" name="reset" class="btn btn-primary col">Reset</button>
                 </div>
 
             </form>
