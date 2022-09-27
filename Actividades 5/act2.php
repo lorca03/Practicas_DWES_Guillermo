@@ -26,11 +26,7 @@
         $numeros = "";
     }
     function cincuenta($array){
-        $arraydividido=[];
-        foreach ($array as $key => $num) {
-            array_push($arraydividido, $num/2);
-        }
-        return $arraydividido;
+        return $array*0.5;
     }
     if (isset($_POST["enviar"])) {
         $numero = $_POST["numero"];
@@ -40,7 +36,7 @@
             $numeros .= $numero;
             $array = explode(" ", $numeros);
             asort($array);
-            $array=cincuenta($array);
+            $array=array_map("cincuenta",$array);
             foreach ($array as $key => $num) {
                 $numerosOrdenados = $numerosOrdenados . $num . "/";
             }

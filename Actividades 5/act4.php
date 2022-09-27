@@ -18,36 +18,59 @@
     $creditos = 100;
     if (isset($_POST["tirar"])) {
         $creditos = $_POST["creditos"];
-
-        if ($creditos > 10) {
-            $creditos -= 10;
-            $num1 = rand(1, 10);
-            $num2 = rand(1, 10);
-            $num3 = rand(1, 10);
-            $num4 = rand(1, 10);
-            $num5 = rand(1, 10);
-            $nums = [$num1, $num2, $num3,$num4,$num5];
-            $cont = 0;
-            foreach ($nums as $key => $num) {
-                if ($num == 5) {
-                    $cont++;
-                }
-            }
-
-            switch ($cont) {
-                case 1:
-                    $creditos += 5;
-                    break;
-                case 2:
-                    $creditos += 25;
-                    break;
-                case 3:
-                    $creditos += 100;
-                    break;
-            }
-            $cont = 0;
+        $apuesta = $_POST["apuesta"];
+        $n = $_POST["n"];
+        if ($creditos >= 300) {
+            echo "<h2 >Has ganado</h2>";
         } else {
-            echo "<h4 >No puedes jugar</h4>";
+            if ($creditos > 10 && $apuesta != false && $n != false) {
+
+                $num1 = rand(1, 10);
+                $num2 = rand(1, 10);
+                $num3 = rand(1, 10);
+                $num4 = rand(1, 10);
+                $num5 = rand(1, 10);
+                $nums = [$num1, $num2, $num3, $num4, $num5];
+                $cont = 0;
+
+
+                foreach ($nums as $key => $num) {
+                    if ($num == $n) {
+                        $cont++;
+                    }
+                }
+                switch ($apuesta) {
+                    case '10':
+                        $creditos -= 10;
+                        if ($cont >= 1) {
+                            $creditos += 30;
+                        }
+                        break;
+                    case '20':
+                        if ($creditos >= 20) {
+                            $creditos -= 20;
+                            if ($cont >= 1) {
+                                $creditos += 60;
+                            }
+                        } else {
+                            echo "<h4 >No puedes jugar</h4>";
+                        }
+                        break;
+                    case '50':
+                        if ($creditos >= 50) {
+                            $creditos -= 50;
+                            if ($cont >= 1) {
+                                $creditos += 150;
+                            }
+                        } else {
+                            echo "<h4 >No puedes jugar</h4>";
+                        }
+                        break;
+                }
+                $cont = 0;
+            } else {
+                echo "<h4 >No puedes jugar</h4>";
+            }
         }
     }
     ?>
@@ -75,6 +98,25 @@
                                                                                                     echo $num5;
                                                                                                 } ?>" />
                 </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="container">
+                            <input type="hidden" name="apuesta" value="0" checked>
+                            <input type="radio" name="apuesta" value="10">
+                            <label for="html">10</label><br>
+                            <input type="radio" name="apuesta" value="20">
+                            <label for="css">20</label><br>
+                            <input type="radio" name="apuesta" value="50">
+                            <label for="javascript">50</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="">Introduce un numero</label>
+                        <input type="number" name="n" class="form-control col" />
+                    </div>
+                </div>
+
                 <br>
                 <div class="form-group row ">
                     <button type="submit" name="tirar" class="btn btn-primary col">Tirar</button>

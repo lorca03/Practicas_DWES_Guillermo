@@ -25,13 +25,6 @@
         $numero = 0;
         $numeros = "";
     }
-    function cincuenta($array){
-        $arraydividido=[];
-        foreach ($array as $key => $num) {
-            array_push($arraydividido, $num/2);
-        }
-        return $arraydividido;
-    }
     if (isset($_POST["enviar"])) {
         $numero = $_POST["numero"];
         $numeros = $_POST["numeros"];
@@ -61,7 +54,7 @@
                 <div class="container">
                     <div class="form-group row">
                         <label for="Ecuacion">Numero</label>
-                        <input type="hidden" name="cont" value="<?php echo $cont; ?>" />
+                        <input type="hidden" disbled name="cont" value="<?php echo $cont; ?>" />
                         <input type="hidden" name="numeros" value="<?php echo $numeros; ?>" />
                         <input type="number" name="numero" class="form-control" />
                         <label for="Ecuacion">Numeros Ordenados</label>
