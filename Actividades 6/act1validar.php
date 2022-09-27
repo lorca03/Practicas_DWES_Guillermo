@@ -23,5 +23,6 @@ if (!empty($nombre) && !empty($edad) && !empty($contra) && !empty($email)) {
 if ($error != "ok") {
     header("location:http://localhost/Servidor/actividades%206/act1.php?error=$error");
 } else {
-    $error="correcto";
+    echo "Los datos son correctos<br>Nombre:".$nombre."<br>Edad:".$edad."<br>Email:".$email."<br>Contraseña:".$contra;
+    
 }

@@ -15,24 +15,25 @@
 
 <body>
     <?php
-    $error = "error_faltandatos";
-    $error = $_GET["error"];
-    switch ($error) {
-        case 'error-nombre':
-            $error = "El nombre no es correcto";
-            break;
-        case 'error-edad':
-            $error = "La edad no es correcta";
-            break;
-        case 'error-email':
-            $error = "El email no es correcto";
-            break;
-        case 'error-contra':
-            $error = "La contraseña no es correcto";
-            break;
-        case 'correcto':
-            $error = "Los datos son correctos";
-            break;
+    if (isset($_GET["error"])) {
+        $error = $_GET["error"];
+        switch ($error) {
+            case 'error-nombre':
+                $error = "El nombre no es correcto";
+                break;
+            case 'error-edad':
+                $error = "La edad no es correcta";
+                break;
+            case 'error-email':
+                $error = "El email no es correcto";
+                break;
+            case 'error-contra':
+                $error = "La contraseña no es correcto";
+                break;
+            case 'error_faltandatos':
+                $error = "Faltan datos";
+                break;
+        }
     }
     ?>
 
