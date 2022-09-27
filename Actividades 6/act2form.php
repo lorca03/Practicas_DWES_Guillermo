@@ -11,7 +11,7 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="estilo.css">
-</head>
+</head> 
 
 <body>
     <?php
@@ -20,7 +20,7 @@
     }
 
     ?>
-
+ 
     <div class="container">
         <div class="abs-center">
             <form method="post" enctype="multipart/form-data" action="act2subir.php" class="border p-3 form">
