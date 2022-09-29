@@ -31,7 +31,7 @@
                 <div class="container">
                     <div class="form-group row">
                         <label for="Ecuacion">Imagen</label>
-                        <input type="file"  class="form-control col" name="img">
+                        <input type="file"  class="form-control col" name="img[]" multiple="">
                     </div>
                 </div>
                 <br>
