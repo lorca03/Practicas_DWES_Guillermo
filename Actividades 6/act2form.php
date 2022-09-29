@@ -19,7 +19,7 @@
         $_FILES = $_POST["img"];
     }
 
-    ?>
+    ?> 
  
     <div class="container">
         <div class="abs-center">
