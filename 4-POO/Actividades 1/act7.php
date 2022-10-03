@@ -14,6 +14,12 @@ class Formato
     }
     public function mostrarTitulo()
     {
-        return $this->titulo;
+        echo "<h1 style='background-color:".$this->fondo ."; color:".$this->fuente ." ; text-align:".$this->alineacion ." ;' >".$this->titulo."</h1>";
     }
 }
+
+$titulo=new Formato("Hola mundo","center","red","blue");
+$titulo->mostrarTitulo();
+
+
+
