@@ -4,9 +4,9 @@ abstract class Operaciones
     public  $valor1;
     public $valor2;
 
-    public function mostrarResultado($resultado)
+    static public function mostrarResultado($resultado)
     {
-        echo $resultado;
+        echo $resultado."\n";
     }
 
     abstract public function operar();
@@ -24,14 +24,14 @@ class Suma extends Operaciones
 {
     public function operar()
     {
-        Operaciones::mostrarResultado(Operaciones::$valor1 + Operaciones::$valor2);
+        $this->mostrarResultado($this->valor1 + $this->valor2);
     }
 }
 class Resta extends Operaciones
 {
     public function operar()
     {
-        Operaciones::mostrarResultado(Operaciones::$valor1 - Operaciones::$valor2);
+        $this->mostrarResultado($this->valor1 -$this->valor2);
     }
 }
 
