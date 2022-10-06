@@ -16,8 +16,8 @@
 <body>
     <?php
     
-    if (isset($_POST["img[]"])) {
-        $_FILES = $_POST["img[]"];
+    if (isset($_POST["img"])) {
+        $_FILES = $_POST["img"];
     }
     ?>
 
@@ -34,6 +34,7 @@
                 <div class=" row ">
                     <button type="submit" name="enviar" class="btn btn-primary col">Enviar</button>
                     <button type="submit" name="visualizar" class="btn btn-primary col">Visualizar</button>
+                    <button type="submit" name="zip" class="btn btn-primary col">Zip</button>
                 </div>
 
             </form>
