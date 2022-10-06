@@ -13,6 +13,7 @@ class Personas
 
     public function __call($name, $arguments)
     {
+        $name=strtolower($name);
         if (substr($name,0,3)=="get") {
             if (substr($name,3)=="nombre") {
                 return $this->nombre;
@@ -25,4 +26,4 @@ class Personas
 }
 
 $pepe=new Personas("pepe","asensio","19");
-echo $pepe->getnombre();
+echo $pepe->getNombre();
