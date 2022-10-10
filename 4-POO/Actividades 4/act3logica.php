@@ -46,7 +46,7 @@ if (isset($_POST["zip"])) {
         if ($gestor) {
             while (($image = readdir($gestor))) {
                 if ($image != "." && $image != "..") {
-                    $zip->addFile('./imagenes/'.$image);
+                    $zip->addFile("./imagenes/".$image);
                 }
             }
         }
