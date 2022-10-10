@@ -42,7 +42,14 @@ if (isset($_POST["zip"])) {
     if (is_dir("./imagenes")) {
         $zip = new ZipArchive();
         $zip->open("fotos.zip", ZipArchive::CREATE);
-        $zip->addEmptyDir("imagenes/");
+        $gestor = opendir("./imagenes");
+        if ($gestor) {
+            while (($image = readdir($gestor))) {
+                if ($image != "." && $image != "..") {
+                    $zip->addFile('./imagenes/'.$image);
+                }
+            }
+        }
         $zip->close();
         header("Content-type: application/octet-stream");
         header("Content-disposition: attachment; filename=fotos.zip");
