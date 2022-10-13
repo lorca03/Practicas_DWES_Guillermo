@@ -43,7 +43,7 @@
                                             <h6 class="card-title"><?= $elemento['precio'] ?></h6>
                                             <form method="post">
                                                 <input type="submit" name="añadir" value="Añadir a la Cesta">
-                                                <input type="text" name="producto" value="<?= $elemento ?>" hidden>
+                                                <input type="text" name="producto" value="<?= $producto ?>" hidden>
                                             </form>
                                         </div>
                                     </div>
@@ -51,22 +51,18 @@
                             <?php } ?>
                         </div>
                     </div>
+
                     <?php
                     $_SESSION['cesta'] = array(
                         "producto1" => 0,
-                        "producto1" => 0,
-                        "producto1" => 0,
-                        "producto1" => 0
+                        "producto2" => 0,
+                        "producto3" => 0,
+                        "producto4" => 0
                     );
                     $accion = !empty($_POST['añadir']) ? $_POST['añadir'] : null;
                     $producto = !empty($_POST['producto']) ? $_POST['producto'] : null;
                     if ($accion == 'Añadir a la Cesta') {
-                        for ($i=0; $i < count($_SESSION['cesta']); $i++) { 
-                            echo $_SESSION['cesta'][$i];
-                            if ($_SESSION['cesta'][$i] == $producto) {
-                                $key++;
-                            }
-                        }
+                        $_SESSION['cesta'][$producto]++;
                     }
 
                     ?>
@@ -74,11 +70,12 @@
                         <h1>Cesta</h1>
                         <ul>
                             <?php
-                            foreach ($_SESSION['cesta'] as $key) {
-                                if ($producto > 0) {
+                            foreach ($_SESSION['cesta'] as $key=>$cantidad) {
+                                //if ($producto > 0) {
                             ?>
-                                <li><?= $producto ?></li>
-                            <?php }
+                                    <li><?= $cantidad ?></li>
+                            <?php
+                            //}
                             } ?>
 
                         </ul>
