@@ -1,5 +1,6 @@
 body {
     background-color: cadetblue;
+    color: #fa7f72;
   }
   .abs-center {
     display: flex;
@@ -23,15 +24,22 @@ body {
   legend{
     color: lightgreen;
   }
-  input[type='button']{
-    background-color: cadetblue;
-    color: white;
-    border: 0px;
-    border-radius: 5px;
-  }
   #cesta{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+
+  .badge {
+    margin-left: 35%;
+    background-color: white;
+    color: #fa7f72;
+  }
+
+  input[type='submit']{
+    background-color: cornflowerblue;
+    border-radius: 3px;
+    color: white;
+    border: 0px;
   }
