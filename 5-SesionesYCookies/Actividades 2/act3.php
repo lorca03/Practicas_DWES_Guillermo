@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -18,12 +18,20 @@
     <?php
 
     session_start();
-    
     if (!isset($_SESSION['sesion'])) {
         $_SESSION['sesion'] = false;
     }
+    if (!isset($_SESSION['tiempo'])) {
+        $_SESSION['tiempo'] = time();
+    } else if (time() - $_SESSION['tiempo'] > 60) {
+        session_destroy();
+        $_SESSION['sesion'] = false;
+        header("Location:act3.php");
+    }
+    $_SESSION['tiempo'] = time();
+
     if (!$_SESSION['sesion']) {
-        include('iniciarSesion.php');
+        include('iniciarSesion2.php');
     } else {
         $productos = array(
             "producto1" => array("nombre" => "Camiseta 1", "precio" =>
@@ -88,6 +96,7 @@
                                 "producto4" => 0
                             );
                         }
+                        
                         ?>
                         <div class="col-3 border " id="cesta">
                             <h1>Cesta</h1>
@@ -116,12 +125,14 @@
                                         $total += ($productos[$key]['precio'] * $cantidad);
                                     }
                                 }
+
                                 ?>
                             </ul>
                             <h6>Total: <span><?= $total ?></span> €</h6>
                             <form method="post">
                                 <input type="submit" name="eliminar" value="Eliminar Productos">
-                                <a href="logout.php">Cerrar Sesion</a>
+                                
+                                <a href="logout2.php">Cerrar Sesion</a>
                             </form>
                             </ul>
                         </div>

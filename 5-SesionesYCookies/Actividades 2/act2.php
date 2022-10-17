@@ -23,10 +23,9 @@
     }
     if (!isset($_SESSION['tiempo'])) {
         $_SESSION['tiempo'] = time();
-    } else if (time() - $_SESSION['tiempo'] > 20) {
+    } else if (time() - $_SESSION['tiempo'] > 60) {
         session_destroy();
         $_SESSION['sesion'] = false;
-        /* Aquí redireccionas a la url especifica */
         header("Location:act2.php");
     }
     $_SESSION['tiempo'] = time();
