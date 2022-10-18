@@ -22,7 +22,7 @@
         private $entradasLibres;
         private $vendidas;
 
-        function __construct($aforo,$descripcion)
+        function __construct($aforo, $descripcion)
         {
             $this->descripcion = $descripcion;
             $this->aforo = $aforo;
@@ -48,10 +48,14 @@
             $this->vendidas += $entradas;
             $this->entradasLibres -= $entradas;
         }
-        function __toString()
+        public function getDescripcion()
         {
-            return 'Vendidas: '+ $this->vendidas;
+            return $this->descripcion;
         }
+        /* function __toString()
+        {
+            return 'Vendidas: ';
+        }*/
     }
 
 
@@ -61,72 +65,89 @@
     <div class="container">
         <div class="abs-center">
             <form method="post" class="border p-3 form">
-                <div class="form-group row">
-                    <label for="Ecuacion">
-                        <h5>Grada</h5>
-                    </label>
-                    <?php
-                    session_start();
-                    if (!isset($_SESSION['grada'])) {
-                        $_SESSION['grada'] = serialize( array( new Zona(3000,'Grada'), new Zona(3000,'Pista') ));
-                    }
-                    $grada = unserialize($_SESSION['grada']);
-                    if (isset($_POST['vender1'])) {
-                        if ($_POST['entradasVender1'] < $grada->getEntradasLibres()) {
-                            $grada->vender($_POST['entradasVender1']);
+                <?php
+                session_start();
+                if (!isset($_SESSION['zonas'])) {
+                    $_SESSION['zonas'] = array(new Zona(3000, 'Grada'), new Zona(1000, 'Pista'), new Zona(100, 'VIP'));
+                }
+                foreach ($_SESSION['zonas'] as $key) {
+                ?>
+                    <div class="form-group row">
+                        <label for="Ecuacion">
+                            <h5><?= $key->getDescripcion() ?></h5>
+                        </label>
+                        <?php
+                        switch ($key->getDescripcion()) {
+                            case 'Grada':
+                                if (isset($_POST['Grada'])) {
+
+                                    if (isset($_POST['GradaEntradas'])) {
+                                        if ($_POST['GradaEntradas']!='') {
+                                            if ($_POST['GradaEntradas'] <= $key->getEntradasLibres()) {
+                                                $key->vender($_POST['GradaEntradas']);
+                                            }else {
+                                                echo "<script> alert('No hay suficientes entradas en la zona: ".$key->getDescripcion()."')</script>";
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                                break;
+                            case 'Pista':
+                                if (isset($_POST['Pista'])) {
+
+                                    if (isset($_POST['PistaEntradas'])) {
+                                        if ($_POST['PistaEntradas']!='') {
+                                            if ($_POST['PistaEntradas'] <= $key->getEntradasLibres()) {
+                                            
+                                                $key->vender($_POST['PistaEntradas']);
+                                            }else {
+                                                echo "<script> alert('No hay suficientes entradas en la zona: ".$key->getDescripcion()."')</script>";
+                                            }   
+                                        }
+                                        
+                                    }
+                                }
+                                break;
+                            case 'VIP':
+                                if (isset($_POST['VIP'])) {
+                                    if (isset($_POST['VIPEntradas'])) {
+                                        if ($_POST['VIPEntradas']!='') {
+                                            if ($_POST['VIPEntradas'] <= $key->getEntradasLibres()) {
+                                                $key->vender($_POST['VIPEntradas']);
+                                            }else {
+                                                echo "<script> alert('No hay suficientes entradas en la zona: ".$key->getDescripcion()."')</script>";
+                                            }   
+                                        }
+                                        
+                                    }
+                                }
+                                break;
                         }
-                    }
 
-                    ?>
-                    <div class="col"><label for="">Vendidas</label><input type="text" disabled class="form-control col" value="<?php echo $grada->getVendidas() ?>" /></div>
-                    <div class="col"><label for="">Restantes</label><input type="text" disabled class="form-control col" value="<?php echo $grada->getEntradasLibres() ?>" /></div>
 
-                    <div class="col">
-                        <div class="row">
-                            <input type="number" min=0 name="entradasVender1" class="form-control" />
+
+                        ?>
+                        <div class="col"><label for="">Vendidas</label><input type="text" disabled class="form-control col" value="<?php echo $key->getVendidas() ?>" /></div>
+                        <div class="col"><label for="">Restantes</label><input type="text" disabled class="form-control col" value="<?php echo $key->getEntradasLibres() ?>" /></div>
+
+                        <div class="col">
+                            <div class="row">
+                                <input type="number" min=0 name="<?= $key->getDescripcion() ?>Entradas" class="form-control" />
+                            </div>
+                            <div class="row"><button type="submit" name="<?= $key->getDescripcion() ?>" class="btn btn-primary col">Vender</button>
+                            </div>
                         </div>
-                        <div class="row"><button type="submit" name="vender1" class="btn btn-primary col">Vender</button>
-                        </div>
+
                     </div>
-
-                </div>
-                <div class="form-group row">
-                    <label for="Ecuacion">
-                        <h5>Pista</h5>
-                    </label>
-                    <?php $pista = new Zona(1000,''); ?>
-                    <div class="col"><label for="">Vendidas</label><input type="text" disabled class="form-control col" value="<?php echo $pista->getVendidas()  ?>" /></div>
-                    <div class="col"><label for="">Restantes</label><input type="text" disabled class="form-control col" value="<?php echo $pista->getAforo() ?>" /></div>
-                    <div class="col">
-                        <div class="row">
-                            <input type="number" min=0 name="entradasVender2" class="form-control" />
-                        </div>
-                        <div class="row"><button type="submit" name="vender2" class="btn btn-primary col">Vender</button>
-                        </div>
-                    </div>
+                <?php
 
 
-                </div>
-                <div class="form-group row">
-                    <label for="Ecuacion">
-                        <h5>VIP</h5>
-                    </label>
-                    <?php $vip = new Zona(100,''); ?>
-                    <div class="col"><label for="">Vendidas</label><input type="text" disabled class="form-control col" value="<?php echo $vip->getVendidas() ?>" /></div>
-                    <div class="col"><label for="">Restantes</label><input type="text" disabled class="form-control col" value="<?php echo $vip->getAforo() ?>" /></div>
-                    <div class="col">
-                        <div class="row">
-                            <input type="number" min=0 name="entradasVender3" class="form-control" />
-                        </div>
-                        <div class="row"><button type="submit" name="vender3" class="btn btn-primary col">Vender</button>
-                        </div>
-                    </div>
+                }
 
-
-                </div>
+                ?>
                 <div class="form-group row ">
                     <form method="post">
-                        <input type="submit" name="eliminar" value="Eliminar Productos">
                         <a href="logout.php">Cerrar Sesion</a>
                     </form>
                 </div>
