@@ -17,15 +17,49 @@
 <body>
     <?php
 
+    try {
+        $enlace = mysqli_connect("localhost", "Guille", "guille", "usuarioss");
+        if (mysqli_connect_errno()) {
+            throw new Exception('La conexion ha fallado');
+        }
     ?>
-    <div class="container">
-        <div class="abs-center">
-            <div class="container">
-                <div class="row border">
+        <div class="container">
+            <div class="abs-center">
+                <div class="container">
+                    <div class="row border">
+                        <?php
+                        if ($resultado = mysqli_query($enlace, "SELECT * FROM datosusuarios")) {
+                            while ($fila = mysqli_fetch_row($resultado)) {
+                        ?>
+                                <hr>
+                                <div class="row">
+                                    <?php
+                                    foreach ($fila as $key => $value) {
+                                    ?>
+
+                                        <div class="col"><?= $value ?></div>
+
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                        <?php
+                            }
+                            mysqli_free_result($resultado);
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php
+    } catch (Exception $ex) {
+        echo $ex->getMessage();
+    }
+
+
+    ?>
+
 
 </body>
 
