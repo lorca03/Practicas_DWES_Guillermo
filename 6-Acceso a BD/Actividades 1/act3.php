@@ -24,9 +24,16 @@
     }
     if (isset($_POST['introducir'])) {
         $titulo=$_POST['titulo'];
+        $editorial=$_POST['editorial'];
+        $autor=$_POST['autor'];
+        $genero=$_POST['genero'];
+        $pais=$_POST['pais'];
+        $paginas=$_POST['paginas'];
+        $precio=$_POST['precio'];
+        $año=$_POST['año'];
         mysqli_query($enlace, 
-        "INSERT INTO hoja1 (NOMBRE_LIBRO,EDITORIAL,AUTOR,GENERO,PAIS DEL AUTOR,NUM_PAGINAS,PRECIO_LIBRO,AÑO_EDICION)  
-        VALUES ( $_POST['titulo'],$_POST['titulo'],$_POST['titulo'],$_POST['titulo'],$_POST['titulo'],$_POST['titulo'],$_POST['titulo'],$_POST['titulo'] )");
+        "INSERT INTO `hoja1` (NOMBRE_LIBRO,EDITORIAL,AUTOR,GENERO,PAIS DEL AUTOR,NUM_PAGINAS,PRECIO_LIBRO,AÑO_EDICION)  
+        VALUES( $titulo,$editorial,$autor,$genero,$pais,$paginas,$precio,$año) ;"); 
     }
     ?>
     <div class="container">
