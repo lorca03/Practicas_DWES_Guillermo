@@ -31,14 +31,11 @@
         $paginas = !empty($_POST['paginas']) ? $_POST['paginas'] : null;
         $precio = !empty($_POST['precio']) ? $_POST['precio'] : null;
         $año = !empty($_POST['año']) ? $_POST['año'] : null;
-        if ($editorial==null) {
-            echo 'rgeaygter';
-        }
-        var_dump( $editorial);
+        
         mysqli_query(
             $enlace,
-            "INSERT INTO `hoja1` (NOMBRE_LIBRO,EDITORIAL,AUTOR,GENERO,PAIS,NUM_PAGINAS,PRECIO_LIBRO,AÑO_EDICION)  
-        VALUES( $titulo,$editorial,$autor,$genero,$pais,$paginas,$precio,$año) ;"
+            "INSERT INTO hoja1 (NOMBRE_LIBRO,EDITORIAL,AUTOR,GÉNERO,PAIS,NUM_PAGINAS,PRECIO_LIBRO,AÑO_EDICION)  
+        VALUES( '$titulo','$editorial','$autor','$genero','$pais','$paginas','$precio','$año') ;"
         );
     }
     ?>

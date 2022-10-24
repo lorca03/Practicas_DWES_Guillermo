@@ -1,0 +1,25 @@
+body {
+  background-color: cadetblue;
+}
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+#buscador {
+  width: 700px;
+  margin-left: 33%;
+}
+#identificador{
+  background-color: cornflowerblue;
+}
+#buscar{
+  padding-top: 20px;
+}
+label {
+  color: blue;
+}
+legend {
+  color: lightgreen;
+}
