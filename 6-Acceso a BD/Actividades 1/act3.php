@@ -23,53 +23,59 @@
         throw new Exception('La conexion ha fallado');
     }
     if (isset($_POST['introducir'])) {
-        $titulo=$_POST['titulo'];
-        $editorial=$_POST['editorial'];
-        $autor=$_POST['autor'];
-        $genero=$_POST['genero'];
-        $pais=$_POST['pais'];
-        $paginas=$_POST['paginas'];
-        $precio=$_POST['precio'];
-        $año=$_POST['año'];
-        mysqli_query($enlace, 
-        "INSERT INTO `hoja1` (NOMBRE_LIBRO,EDITORIAL,AUTOR,GENERO,PAIS DEL AUTOR,NUM_PAGINAS,PRECIO_LIBRO,AÑO_EDICION)  
-        VALUES( $titulo,$editorial,$autor,$genero,$pais,$paginas,$precio,$año) ;"); 
+        $titulo = !empty($_POST['titulo']) ? $_POST['titulo'] : null;
+        $editorial = !empty($_POST['editorial']) ? $_POST['editorial'] : null;
+        $autor = !empty($_POST['autor']) ? $_POST['autor'] : null;
+        $genero = !empty($_POST['genero']) ? $_POST['genero'] : null;
+        $pais = !empty($_POST['pais']) ? $_POST['pais'] : null;
+        $paginas = !empty($_POST['paginas']) ? $_POST['paginas'] : null;
+        $precio = !empty($_POST['precio']) ? $_POST['precio'] : null;
+        $año = !empty($_POST['año']) ? $_POST['año'] : null;
+        if ($editorial==null) {
+            echo 'rgeaygter';
+        }
+        var_dump( $editorial);
+        mysqli_query(
+            $enlace,
+            "INSERT INTO `hoja1` (NOMBRE_LIBRO,EDITORIAL,AUTOR,GENERO,PAIS,NUM_PAGINAS,PRECIO_LIBRO,AÑO_EDICION)  
+        VALUES( $titulo,$editorial,$autor,$genero,$pais,$paginas,$precio,$año) ;"
+        );
     }
     ?>
     <div class="container">
         <div class="abs-center">
             <form method="post" action="#" class="border p-3 form">
                 <div class="form-group row">
-                    <label >Titulo</label>
+                    <label>Titulo</label>
                     <input type="text" class="form-control col" name="titulo">
                 </div>
                 <div class="form-group row">
-                    <label >Editorial</label>
+                    <label>Editorial</label>
                     <input type="text" class="form-control col" name="editorial">
                 </div>
                 <div class="form-group row">
-                    <label >Autor</label>
+                    <label>Autor</label>
                     <input type="text" class="form-control col" name="autor">
                 </div>
                 <div class="form-group row">
-                    <label >Genero</label>
+                    <label>Genero</label>
                     <input type="text" class="form-control col" name="genero">
                 </div>
                 <div class="form-group row">
-                    <label >Pais del autor</label>
+                    <label>Pais del autor</label>
                     <input type="text" class="form-control col" name="pais">
                 </div>
                 <div class="form-group row">
-                    <label >Numero de paginas</label>
-                    <input type="text" class="form-control col" name="paginas">
+                    <label>Numero de paginas</label>
+                    <input type="number" min="1" class="form-control col" name="paginas">
                 </div>
                 <div class="form-group row">
-                    <label >Precio libro</label>
+                    <label>Precio libro</label>
                     <input type="text" class="form-control col" name="precio">
                 </div>
                 <div class="form-group row">
-                    <label >Año edicion</label>
-                    <input type="text" class="form-control col" name="año">
+                    <label>Año edicion</label>
+                    <input type="number" class="form-control col" name="año">
                 </div>
                 <br>
                 <button type="submit" name="introducir" class="btn btn-primary col">Introducir</button>
