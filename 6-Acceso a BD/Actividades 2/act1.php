@@ -110,8 +110,9 @@
                         $paginas = !empty($_POST['6'.$key]) ? $_POST['6'.$key] : null;
                         $precio = !empty($_POST['7'.$key]) ? $_POST['7'.$key] : null;
                         $año = !empty($_POST['8'.$key]) ? $_POST['8'.$key] : null;
-                        if ($resultado = mysqli_query($enlace, "UPDATE hoja1 SET Nombre_libro='$titulo' ,Editorial='$editorial',Autor='$autor' ,Género='$genero' ,Pais='$pais' , Num_paginas='$paginas' ,Precio_libro='$precio' ,Año_edicion='$año' where cod_libro=$key ")) {
-                            echo 'Se ha actualizado '.$key;
+                        if ($resultado = mysqli_query($enlace, "UPDATE hoja1 SET Nombre_libro='$titulo' , Editorial='$editorial', Autor='$autor' , Género='$genero' , Pais='$pais' , Num_paginas=$paginas , Precio_libro='$precio' , Año_edicion=$año 
+                        where cod_libro=$key ")) {
+                            echo 'Se ha actualizado el libro '.$key." de titulo $titulo</br>";
                         }
                     }
                 }
