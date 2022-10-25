@@ -14,13 +14,8 @@
 
 <body>
     <?php
-    $enlace = mysqli_connect("localhost", "Guille", "guille", "libros");
-    mysqli_set_charset($enlace, "UTF8");
+    include('conexionPDO.php');
     $contador = 0;
-    if (mysqli_connect_errno()) {
-        throw new Exception('La conexion ha fallado');
-    }
-
     ?>
     <div class="container">
         <div class="abs-center">
@@ -41,7 +36,10 @@
                     <button type="submit" name="actualizar" class="btn btn-primary ">Actualiza</button>
                     <?php
                     if (isset($_POST['buscar'])) {
-                        $titulo = $_POST['titulo'];
+                        $titulo ='%'. $_POST['titulo'].'%';
+                        $consulta="SELECT * FROM hoja1 WHERE Nombre_libro LIKE :titulo ";
+                        $resultado= $conexion->prepare($consulta);
+                        $resultado->execute(array(":titulo->$titulo"));
                         if ($resultado = mysqli_query($enlace, "SELECT * FROM hoja1 WHERE Nombre_libro LIKE '%$titulo%' ")) {
                             $ids = "";
                             while ($fila = mysqli_fetch_row($resultado)) {

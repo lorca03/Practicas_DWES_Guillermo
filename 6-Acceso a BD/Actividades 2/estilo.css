@@ -13,6 +13,7 @@ body {
 }
 #identificador{
   background-color: cornflowerblue;
+  width: 4%;
 }
 #buscar{
   padding-top: 20px;
@@ -22,4 +23,9 @@ label {
 }
 legend {
   color: lightgreen;
+}
+
+input[name='eliminar']{
+  background-color: rgb(233, 78, 78);
+  width: 7%;
 }
