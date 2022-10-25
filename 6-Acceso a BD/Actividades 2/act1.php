@@ -12,19 +12,15 @@
     <link rel="stylesheet" href="estilo.css">
 </head>
 
-
-
 <body>
     <?php
-
-
-    $enlace = mysqli_connect("localhost", "guille", "guille", "libros");
+    $enlace = mysqli_connect("localhost", "Guille", "guille", "libros");
     mysqli_set_charset($enlace, "UTF8");
     $contador = 0;
     if (mysqli_connect_errno()) {
         throw new Exception('La conexion ha fallado');
     }
-    
+
     ?>
     <div class="container">
         <div class="abs-center">
@@ -38,81 +34,73 @@
                             </div>
                             <div class="col" id="buscar">
                                 <button type="submit" name="buscar" class="btn btn-primary ">Buscar</button>
-                                
                             </div>
-
                     </form>
                 </div>
                 <form action="#" method="POST">
-                <button type="submit" name="actualizar" class="btn btn-primary ">Actualiza</button>
+                    <button type="submit" name="actualizar" class="btn btn-primary ">Actualiza</button>
                     <?php
-
                     if (isset($_POST['buscar'])) {
-                        
                         $titulo = $_POST['titulo'];
                         if ($resultado = mysqli_query($enlace, "SELECT * FROM hoja1 WHERE Nombre_libro LIKE '%$titulo%' ")) {
-                            $ids="";
+                            $ids = "";
                             while ($fila = mysqli_fetch_row($resultado)) {
                     ?>
                                 <hr>
-
                                 <div class="form-group row">
                                     <?php
-                                    $ids.=$fila[0].' ';
+                                    $ids .= $fila[0] . ' ';
                                     for ($i = 0; $i < count($fila); $i++) {
-                                        
                                         if ($i == 0) {
-                                            
+
                                     ?>
-                                            <input type="text" id="identificador" class="form-control col" name="<?= $i.$fila[0] ?>" value="<?= $fila[$i] ?>" disabled>
+                                            <input type="text" id="identificador" class="form-control col" name="<?= $i . $fila[0] ?>" value="<?= $fila[$i] ?>" disabled>
                                         <?php
                                         } else {
                                         ?>
-                                        
-                                            <input type="text" class="form-control col" name="<?= $i.$fila[0] ?>" value="<?= $fila[$i] ?>">
-
+                                            <input type="text" class="form-control col" name="<?= $i . $fila[0] ?>" value="<?= $fila[$i] ?>">
                                     <?php
                                         }
-                                        
                                     }
-                                    
                                     ?>
                                 </div>
-
-
-                    <?php
+                        <?php
                                 $contador++;
                             }
-                            echo $contador;
-                            
-                            mysqli_free_result($resultado);
-                           
                             echo $ids;
+                            mysqli_free_result($resultado);
                         }
-                        echo $ids;
                         ?>
-                        <input type="text"  name="ids" value="<?php echo $ids ?>">
-                        <?php
+                        <input type="text" name="ids" value="<?php echo $ids ?>" hidden>
+                    <?php
                     }
                     ?>
-                    
                 </form>
                 <?php
                 if (isset($_POST['actualizar'])) {
-                    $IDS=!empty($_POST['ids']) ? $_POST['ids'] : null;
-                    $IDS=explode(' ', $IDS);
-                    foreach ($IDS as $key ) {
-                        $titulo = !empty($_POST['1'.$key]) ? $_POST['1'.$key] : null;
-                        $editorial = !empty($_POST['2'.$key]) ? $_POST['2'.$key] : null;
-                        $autor = !empty($_POST['3'.$key]) ? $_POST['3'.$key] : null;
-                        $genero = !empty($_POST['4'.$key]) ? $_POST['4'.$key] : null;
-                        $pais = !empty($_POST['5'.$key]) ? $_POST['5'.$key] : null;
-                        $paginas = !empty($_POST['6'.$key]) ? $_POST['6'.$key] : null;
-                        $precio = !empty($_POST['7'.$key]) ? $_POST['7'.$key] : null;
-                        $año = !empty($_POST['8'.$key]) ? $_POST['8'.$key] : null;
-                        if ($resultado = mysqli_query($enlace, "UPDATE hoja1 SET Nombre_libro='$titulo' , Editorial='$editorial', Autor='$autor' , Género='$genero' , Pais='$pais' , Num_paginas=$paginas , Precio_libro='$precio' , Año_edicion=$año 
-                        where cod_libro=$key ")) {
-                            echo 'Se ha actualizado el libro '.$key." de titulo $titulo</br>";
+                    $IDS = !empty($_POST['ids']) ? $_POST['ids'] : null;
+                    $IDS = explode(' ', $IDS);
+                    foreach ($IDS as $key) {
+                        $titulo = !empty($_POST['1' . $key]) ? $_POST['1' . $key] : null;
+                        $editorial = !empty($_POST['2' . $key]) ? $_POST['2' . $key] : null;
+                        $autor = !empty($_POST['3' . $key]) ? $_POST['3' . $key] : null;
+                        $genero = !empty($_POST['4' . $key]) ? $_POST['4' . $key] : null;
+                        $pais = !empty($_POST['5' . $key]) ? $_POST['5' . $key] : null;
+                        $paginas = !empty($_POST['6' . $key]) ? $_POST['6' . $key] : null;
+                        $precio = !empty($_POST['7' . $key]) ? $_POST['7' . $key] : null;
+                        $ano = !empty($_POST['8' . $key]) ? $_POST['8' . $key] : null;
+                        if ($resultado = mysqli_query($enlace, 
+                        "UPDATE hoja1 
+                        SET Nombre_libro='$titulo' , 
+                        Editorial='$editorial', 
+                        Autor='$autor' , 
+                        Género='$genero' , 
+                        Pais='$pais' ,
+                        Num_paginas='$paginas' 
+                        /*Precio_libro='$precio' , 
+                        Año_edicion='$ano'*/
+                        where cod_libro=$key ;")) {
+                            echo 'Se ha actualizado el libro ' . $key . " de titulo". $titulo."</br>";
                         }
                     }
                 }
@@ -121,9 +109,6 @@
         </div>
     </div>
     </div>
-
-
-
 </body>
 
 </html>
